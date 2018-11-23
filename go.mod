@@ -1,7 +1,8 @@
-module github.com/dayan-be/kit
+module github.com/dy-gopkg/kit
 
 require (
 	github.com/Azure/go-ansiterm v0.0.0-20170929234023-d6e3b3328b78 // indirect
+	github.com/BurntSushi/toml v0.3.1 // indirect
 	github.com/DataDog/datadog-go v0.0.0-20180822151419-281ae9f2d895 // indirect
 	github.com/Jeffail/gabs v1.1.1 // indirect
 	github.com/Microsoft/go-winio v0.4.11 // indirect
@@ -16,6 +17,7 @@ require (
 	github.com/asaskevich/govalidator v0.0.0-20180720115003-f9ffefc3facf // indirect
 	github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973 // indirect
 	github.com/bitly/go-hostpool v0.0.0-20171023180738-a3a6125de932 // indirect
+	github.com/bitly/go-simplejson v0.5.0 // indirect
 	github.com/bmizerany/assert v0.0.0-20160611221934-b7ed37b82869 // indirect
 	github.com/boltdb/bolt v1.3.1 // indirect
 	github.com/cenkalti/backoff v2.0.0+incompatible // indirect
@@ -72,6 +74,7 @@ require (
 	github.com/lyft/protoc-gen-validate v0.0.10 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
 	github.com/micro/cli v0.0.0-20180830071301-8b9d33ec2f19 // indirect
+	github.com/micro/go-config v0.10.0
 	github.com/micro/go-log v0.0.0-20170512141327-cbfa9447f9b6 // indirect
 	github.com/micro/go-micro v0.12.0
 	github.com/micro/go-rcache v0.0.0-20180418165751-a581a57b5133 // indirect
@@ -108,6 +111,5 @@ require (
 	gopkg.in/ldap.v2 v2.5.1 // indirect
 	gopkg.in/mgo.v2 v2.0.0-20180705113604-9856a29383ce // indirect
 	gopkg.in/vmihailenco/msgpack.v2 v2.9.1 // indirect
-	gopkg.in/yaml.v2 v2.2.1
 	gotest.tools v2.2.0+incompatible // indirect
 )

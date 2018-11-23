@@ -1,0 +1,16 @@
+{
+  "registry": {
+    "address": "127.0.0.1:8500"
+  },
+  "service": {
+    "name": "dayan-srv-demo",
+    "listenAddr": "127.0.0.1:8500",
+    "brokeAddr": "127.0.0.1:8500",
+    "version": "v1.0.0"
+  },
+  "log": {
+    "path": "log",
+    "level": "debug",
+    "fileSize": 1024000
+  }
+}
