@@ -3,8 +3,7 @@ package kit
 import (
 	"flag"
 	"fmt"
-	"github.com/dy-gopkg/kit/log"
-	"github.com/micro/go-config/source/file"
+	"github.com/dy-gopkg/kit/util"
 	"github.com/micro/go-config"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/registry"
@@ -41,28 +40,7 @@ func Init(){
 		os.Exit(0)
 	}
 
-	// 加载最基础的配置
-	err := config.Load(file.NewSource(file.WithPath("config.json")))
-	if err != nil{
-		fmt.Println("%v",err)
-		os.Exit(1)
-	}
-
-	ServiceConfigAddr = config.Get("ServiceConfig", "Addr").String("127.0.0.1:9999")
-	ServiceConfigPath = config.Get("ServiceConfig", "Path").String("/conf/default")
-	BusinessConfigAddr = config.Get("BusinessConfig", "Addr").String("127.0.0.1:9999")
-	BusinessConfigPath = config.Get("BusinessConfig", "Path").String("/conf/default")
-
-
-	// log
-	level, _ := logrus.ParseLevel(config.Get("log","level").String("info"))
-	logrus.SetLevel(level)
-
-	logrus.SetOutput(log.NewLogFile(
-		log.FilePath("log"),
-		log.FileSize(config.Get("log","fileSize").Int(10),
-			config.Get("log","fileUnit").String("M")),
-		log.FileTime(true)))
+	util.LoadConfig()
 
 	DefaultService = micro.NewService(
 		micro.Name(config.Get("srv","srvName").String("default")),
