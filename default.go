@@ -19,10 +19,6 @@ var (
 
 var (
 	DefaultService micro.Service
-	ServiceConfigAddr string
-	ServiceConfigPath string
-	BusinessConfigAddr string
-	BusinessConfigPath string
 )
 
 
@@ -49,7 +45,6 @@ func Init(){
 		micro.Registry(registry.NewRegistry(registry.Addrs(util.ServiceConf.Registry.Address))))
 
 	DefaultService.Init()
-
 
 }
 
