@@ -88,20 +88,10 @@ func FilePath(path string) Option {
 }
 
 //设置文件切割大小
-func FileSize(size int, unit string) Option {
+func FileSize(size int) Option {
 	return func(file *logFile) {
 		file.sizeFlag = true
-
-		switch unit {
-		case "K":
-			file.sizeValue = int64(size) * 1024
-		case "M":
-			file.sizeValue = int64(size) * 1024 * 1024
-		case "G":
-			file.sizeValue = int64(size) * 1024 * 1024 * 1024
-		default:
-			file.sizeValue = int64(size)
-		}
+		file.sizeValue = int64(size) * 1024 * 1024
 	}
 }
 

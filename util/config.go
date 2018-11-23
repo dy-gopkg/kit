@@ -90,8 +90,7 @@ func initLogger() {
 
 	logrus.SetOutput(log.NewLogFile(
 		log.FilePath(ServiceConf.Log.Path),
-		log.FileSize(config.Get("log","fileSize").Int(10),
-			config.Get("log","fileUnit").String("M")),
+		log.FileSize(config.Get("log","fileSize").Int(10)),
 		log.FileTime(true)))
 
 }
