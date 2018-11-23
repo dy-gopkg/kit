@@ -4,12 +4,10 @@ import (
 	"flag"
 	"fmt"
 	"github.com/dy-gopkg/kit/util"
-	"github.com/micro/go-config"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/registry"
 	"github.com/sirupsen/logrus"
 	"os"
-	"strconv"
 	"time"
 )
 
@@ -43,12 +41,12 @@ func Init(){
 	util.LoadConfig()
 
 	DefaultService = micro.NewService(
-		micro.Name(config.Get("srv","srvName").String("default")),
+		micro.Name(util.ServiceConf.Service.Name),
 		micro.RegisterTTL(time.Second*30),
 		micro.RegisterInterval(time.Second*10),
-		micro.Version(config.Get("srv","version").String("0.0.0")),
-		micro.Metadata(map[string]string{"ID": strconv.FormatUint(uint64(config.Get("srv","srvId").Int(0)), 10)}),
-		micro.Registry(registry.NewRegistry(registry.Addrs(config.Get("registry","addr").String("0.0.0.0:8500")))))
+		micro.Version(util.ServiceConf.Service.Version),
+		micro.Metadata(util.ServiceConf.Service.Metadata),
+		micro.Registry(registry.NewRegistry(registry.Addrs(util.ServiceConf.Registry.Address))))
 
 	DefaultService.Init()
 

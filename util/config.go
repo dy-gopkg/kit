@@ -30,6 +30,7 @@ type ServiceConfig struct {
 		ListenAddr string
 		BrokerAddr string
 		Version string
+		Metadata map[string]string
 	}
 
 	Log struct {

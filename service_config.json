@@ -6,7 +6,10 @@
     "name": "dayan-srv-demo",
     "listenAddr": "127.0.0.1:8500",
     "brokeAddr": "127.0.0.1:8500",
-    "version": "v1.0.0"
+    "version": "v1.0.0",
+    "metadata": {
+      "id":"1"
+    }
   },
   "log": {
     "path": "log",
