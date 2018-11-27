@@ -6,6 +6,7 @@ import (
 	"github.com/dy-gopkg/kit/util"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/registry"
+	"github.com/micro/go-micro/server"
 	"github.com/sirupsen/logrus"
 	"os"
 	"time"
@@ -53,4 +54,28 @@ func Run(){
 	if err := DefaultService.Run(); err != nil {
 		logrus.Fatalf("service run error: %v", err)
 	}
+}
+
+func Server() server.Server {
+	return DefaultService.Server()
+}
+
+func ServiceName() string {
+	return util.ServiceConf.Service.Name
+}
+
+func ServiceListenAddr() string {
+	return util.ServiceConf.Service.ListenAddr
+}
+
+func ServiceBrokerAddr() string {
+	return util.ServiceConf.Service.BrokerAddr
+}
+
+func ServiceVersion() string {
+	return util.ServiceConf.Service.Version
+}
+
+func ServiceMetadata() map[string]string {
+	return util.ServiceConf.Service.Metadata
 }
