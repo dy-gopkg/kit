@@ -76,6 +76,10 @@ func ServiceVersion() string {
 	return util.ServiceConf.Service.Version
 }
 
-func ServiceMetadata() map[string]string {
-	return util.ServiceConf.Service.Metadata
+func ServiceMetadata(key, def string) string {
+	val, ok :=  util.ServiceConf.Service.Metadata[key]
+	if ok {
+		return val
+	}
+	return def
 }
