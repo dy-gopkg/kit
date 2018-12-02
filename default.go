@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/dy-gopkg/kit/util"
 	"github.com/micro/go-micro"
+	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-micro/server"
 	"github.com/sirupsen/logrus"
@@ -82,4 +83,8 @@ func ServiceMetadata(key, def string) string {
 		return val
 	}
 	return def
+}
+
+func Client() client.Client {
+	return DefaultService.Client()
 }
