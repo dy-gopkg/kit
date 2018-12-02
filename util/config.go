@@ -42,7 +42,7 @@ type ServiceConfig struct {
 
 var (
 	BaseConf BaseConfig
-	ServiceConf ServiceConfig
+	ServiceConf ServiceConfig //服务配置
 )
 
 func LoadConfig() {
@@ -52,7 +52,6 @@ func LoadConfig() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-
 	err = config.Scan(&BaseConf)
 	if err != nil {
 		fmt.Println(err)
@@ -64,16 +63,19 @@ func LoadConfig() {
 
 func loadServiceConfig() {
 	// default load from local config file
+	ServiceConf.Service.Metadata = make(map[string]string)
 	err := config.Load(file.NewSource(file.WithPath("service_config.json")))
 	if err != nil {
-		err = config.Load(consul.NewSource(consul.WithAddress(BaseConf.ServiceConfig.Addr)))
+		err = config.Load(consul.NewSource(
+			consul.WithAddress(BaseConf.ServiceConfig.Addr),
+			consul.WithPrefix(BaseConf.ServiceConfig.Path)))
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
 		}
 	}
 
-	err = config.Get(BaseConf.ServiceConfig.Path).Scan(&ServiceConf)
+	err = config.Scan(&ServiceConf)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -92,6 +94,8 @@ func initLogger() {
 		log.FilePath(ServiceConf.Log.Path),
 		log.FileSize(config.Get("log","fileSize").Int(10)),
 		log.FileTime(true)))
+
+	fmt.Println(ServiceConf.Log.Path)
 
 }
 
