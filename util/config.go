@@ -94,9 +94,6 @@ func initLogger() {
 		log.FilePath(ServiceConf.Log.Path),
 		log.FileSize(config.Get("log","fileSize").Int(10)),
 		log.FileTime(true)))
-
-	fmt.Println(ServiceConf.Log.Path)
-
 }
 
 func setLoggerLevel() {
