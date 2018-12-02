@@ -27,6 +27,7 @@ type ServiceConfig struct {
 
 	Service struct {
 		Name string
+		ExternalAddr string
 		ListenAddr string
 		BrokerAddr string
 		Version string

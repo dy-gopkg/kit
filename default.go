@@ -5,9 +5,11 @@ import (
 	"fmt"
 	"github.com/dy-gopkg/kit/util"
 	"github.com/micro/go-micro"
+	"github.com/micro/go-micro/broker"
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-micro/server"
+	tp "github.com/micro/go-micro/transport"
 	"github.com/sirupsen/logrus"
 	"os"
 	"time"
@@ -37,14 +39,18 @@ func Init(){
 	}
 
 	util.LoadConfig()
-
+	transport := tp.NewTransport()
+	transport.Listen(util.ServiceConf.Service.ListenAddr)
+	bk := broker.NewBroker(broker.Addrs(util.ServiceConf.Service.BrokerAddr))
 	DefaultService = micro.NewService(
 		micro.Name(util.ServiceConf.Service.Name),
 		micro.RegisterTTL(time.Second*30),
 		micro.RegisterInterval(time.Second*10),
 		micro.Version(util.ServiceConf.Service.Version),
 		micro.Metadata(util.ServiceConf.Service.Metadata),
-		micro.Registry(registry.NewRegistry(registry.Addrs(util.ServiceConf.Registry.Address))))
+		micro.Registry(registry.NewRegistry(registry.Addrs(util.ServiceConf.Registry.Address))),
+		micro.Transport(transport),
+		micro.Broker(bk))
 
 	DefaultService.Init()
 
@@ -67,6 +73,10 @@ func ServiceName() string {
 
 func ServiceListenAddr() string {
 	return util.ServiceConf.Service.ListenAddr
+}
+
+func ServiceExternAddr() string{
+	return util.ServiceConf.Service.ExternalAddr
 }
 
 func ServiceBrokerAddr() string {
