@@ -13,7 +13,6 @@ import (
 	"time"
 )
 
-
 var (
 	GitTag    = "2000.01.01.release"
 	BuildTime = "2000-01-01T00:00:00+0800"
@@ -23,10 +22,8 @@ var (
 	DefaultService micro.Service
 )
 
-
-
-func Init(){
-	//显示版本号信息　
+func Init() {
+	//显示版本号信息
 	version := flag.Bool("v", false, "version")
 	flag.Parse()
 
@@ -50,8 +47,7 @@ func Init(){
 
 }
 
-
-func Run(){
+func Run() {
 	if err := DefaultService.Run(); err != nil {
 		logrus.Fatalf("service run error: %v", err)
 	}
@@ -69,7 +65,7 @@ func ServiceListenAddr() string {
 	return util.ServiceConf.Service.ListenAddr
 }
 
-func ServiceExternAddr() string{
+func ServiceExternAddr() string {
 	return util.ServiceConf.Service.ExternalAddr
 }
 
@@ -82,7 +78,7 @@ func ServiceVersion() string {
 }
 
 func ServiceMetadata(key, def string) string {
-	val, ok :=  util.ServiceConf.Service.Metadata[key]
+	val, ok := util.ServiceConf.Service.Metadata[key]
 	if ok {
 		return val
 	}

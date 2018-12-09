@@ -16,7 +16,7 @@ type AddrAndPath struct {
 }
 
 type BaseConfig struct {
-	ServiceConfig AddrAndPath `json:"ServiceConfig"`
+	ServiceConfig  AddrAndPath `json:"ServiceConfig"`
 	BusinessConfig AddrAndPath `json:"BusinessConfig"`
 }
 
@@ -26,30 +26,30 @@ type ServiceConfig struct {
 	}
 
 	Service struct {
-		Name string
+		Name         string
 		ExternalAddr string
-		ListenAddr string
-		BrokerAddr string
-		Version string
-		Metadata map[string]string
+		ListenAddr   string
+		BrokerAddr   string
+		Version      string
+		Metadata     map[string]string
 	}
 
 	Log struct {
-		Path string
-		Level string
+		Path     string
+		Level    string
 		FileSize int32
 	}
 }
 
 var (
-	BaseConf BaseConfig
+	BaseConf    BaseConfig
 	ServiceConf ServiceConfig //服务配置
 )
 
 func LoadConfig() {
 	// 加载最基础的配置
 	err := config.Load(file.NewSource(file.WithPath("config.json")))
-	if err != nil{
+	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
@@ -93,7 +93,7 @@ func initLogger() {
 
 	logrus.SetOutput(log.NewLogFile(
 		log.FilePath(ServiceConf.Log.Path),
-		log.FileSize(config.Get("log","fileSize").Int(10)),
+		log.FileSize(config.Get("log", "fileSize").Int(10)),
 		log.FileTime(true)))
 }
 

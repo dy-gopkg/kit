@@ -170,7 +170,7 @@ func (f *logFile) worker() {
 		case msg := <-f.msgQueue:
 			{
 				if f.closed == false {
-					f.curFile.WriteString(msg + "\n")
+					f.curFile.WriteString(msg)
 					if f.sizeFlag == true {
 						curInfo, _ := os.Stat(f.filePath + f.fileName)
 						if curInfo.Size() >= f.sizeValue {
