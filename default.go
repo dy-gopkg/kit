@@ -35,12 +35,12 @@ func Init() {
 
 	util.LoadConfig()
 	DefaultService = micro.NewService(
-		micro.Name(util.ServiceConf.Service.Name),
+		micro.Name(util.ServiceConf.Name),
 		micro.RegisterTTL(time.Second*30),
 		micro.RegisterInterval(time.Second*10),
-		micro.Version(util.ServiceConf.Service.Version),
-		micro.Metadata(util.ServiceConf.Service.Metadata),
-		micro.Registry(registry.NewRegistry(registry.Addrs(util.ServiceConf.Registry.Address))),
+		micro.Version(util.ServiceConf.Version),
+		micro.Metadata(util.ServiceConf.Metadata),
+		micro.Registry(registry.NewRegistry(registry.Addrs(util.RegistryConf.Address))),
 	)
 
 	DefaultService.Init()
@@ -58,27 +58,27 @@ func Server() server.Server {
 }
 
 func ServiceName() string {
-	return util.ServiceConf.Service.Name
+	return util.ServiceConf.Name
 }
 
 func ServiceListenAddr() string {
-	return util.ServiceConf.Service.ListenAddr
+	return util.ServiceConf.ListenAddr
 }
 
-func ServiceExternAddr() string {
-	return util.ServiceConf.Service.ExternalAddr
+func ServiceExternalAddr() string {
+	return util.ServiceConf.ExternalAddr
 }
 
 func ServiceBrokerAddr() string {
-	return util.ServiceConf.Service.BrokerAddr
+	return util.ServiceConf.BrokerAddr
 }
 
 func ServiceVersion() string {
-	return util.ServiceConf.Service.Version
+	return util.ServiceConf.Version
 }
 
 func ServiceMetadata(key, def string) string {
-	val, ok := util.ServiceConf.Service.Metadata[key]
+	val, ok := util.ServiceConf.Metadata[key]
 	if ok {
 		return val
 	}
