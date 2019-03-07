@@ -1,4 +1,4 @@
-package kit
+package micro
 
 import (
 	"flag"
@@ -35,12 +35,12 @@ func Init() {
 
 	util.LoadConfig()
 	DefaultService = micro.NewService(
-		micro.Name(util.ServiceConf.Name),
+		micro.Name(DefaultServiceConf.Name),
 		micro.RegisterTTL(time.Second*30),
 		micro.RegisterInterval(time.Second*10),
-		micro.Version(util.ServiceConf.Version),
-		micro.Metadata(util.ServiceConf.Metadata),
-		micro.Registry(registry.NewRegistry(registry.Addrs(util.RegistryConf.Address))),
+		micro.Version(DefaultServiceConf.Version),
+		micro.Metadata(DefaultServiceConf.Metadata),
+		micro.Registry(registry.NewRegistry(registry.Addrs(DefaultRegistryConf.Address))),
 	)
 
 	DefaultService.Init()
@@ -58,27 +58,27 @@ func Server() server.Server {
 }
 
 func ServiceName() string {
-	return util.ServiceConf.Name
+	return DefaultServiceConf.Name
 }
 
 func ServiceListenAddr() string {
-	return util.ServiceConf.ListenAddr
+	return DefaultServiceConf.ListenAddr
 }
 
 func ServiceExternalAddr() string {
-	return util.ServiceConf.ExternalAddr
+	return DefaultServiceConf.ExternalAddr
 }
 
 func ServiceBrokerAddr() string {
-	return util.ServiceConf.BrokerAddr
+	return DefaultServiceConf.BrokerAddr
 }
 
 func ServiceVersion() string {
-	return util.ServiceConf.Version
+	return DefaultServiceConf.Version
 }
 
 func ServiceMetadata(key, def string) string {
-	val, ok := util.ServiceConf.Metadata[key]
+	val, ok := DefaultServiceConf.Metadata[key]
 	if ok {
 		return val
 	}
@@ -88,3 +88,4 @@ func ServiceMetadata(key, def string) string {
 func Client() client.Client {
 	return DefaultService.Client()
 }
+

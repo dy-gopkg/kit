@@ -65,8 +65,9 @@ require (
 	github.com/lyft/protoc-gen-validate v0.0.13 // indirect
 	github.com/mattbaird/elastigo v0.0.0-20170123220020-2fe47fd29e4b // indirect
 	github.com/michaelklishin/rabbit-hole v1.5.0 // indirect
-	github.com/micro/go-config v0.14.0
-	github.com/micro/go-micro v0.27.0
+	github.com/micro/go-config v1.0.0
+	github.com/micro/go-micro v1.0.0
+	github.com/micro/go-web v1.0.0
 	github.com/mitchellh/pointerstructure v0.0.0-20170205204203-f2329fcfa9e2 // indirect
 	github.com/ory-am/common v0.4.0 // indirect
 	github.com/ory/dockertest v3.3.4+incompatible // indirect

@@ -1,4 +1,5 @@
-package util
+package web
+
 
 import (
 	"fmt"
@@ -10,7 +11,6 @@ import (
 	"os"
 )
 
-
 type (
 	RegistryConfig struct {
 		Address string
@@ -18,9 +18,6 @@ type (
 
 	ServiceConfig struct {
 		Name         string
-		ExternalAddr string
-		ListenAddr   string
-		BrokerAddr   string
 		Version      string
 		Metadata     map[string]string
 	}
@@ -33,9 +30,9 @@ type (
 )
 
 var (
-	RegistryConf RegistryConfig
-	ServiceConf ServiceConfig //服务配置
-	LogConf LogConfig
+	DefaultRegistryConf RegistryConfig
+	DefaultServiceConf ServiceConfig //服务配置
+	DefaultLogConf LogConfig
 )
 
 func LoadConfig() {
@@ -55,14 +52,14 @@ func LoadConfig() {
 		}
 	}
 	// 加载注册中心地址
-	err = config.Get("registry").Scan(&RegistryConf)
+	err = config.Get("registry").Scan(&DefaultRegistryConf)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
 
 	// 加载服务配置
-	err = config.Get("service").Scan(&ServiceConf)
+	err = config.Get("service").Scan(&DefaultServiceConf)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -73,18 +70,18 @@ func LoadConfig() {
 }
 
 func loadLogConfAndInitLogger() {
-	err := config.Get("log").Scan(&LogConf)
+	err := config.Get("log").Scan(&DefaultLogConf)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
 
-	level, _ := logrus.ParseLevel(LogConf.Level)
+	level, _ := logrus.ParseLevel(DefaultLogConf.Level)
 	logrus.SetLevel(level)
 
 	logrus.SetOutput(log.NewLogFile(
-		log.FilePath(LogConf.Path),
-		log.FileSize(LogConf.FileSize),
+		log.FilePath(DefaultLogConf.Path),
+		log.FileSize(DefaultLogConf.FileSize),
 		log.FileTime(true)))
 
 	go watchLogConf()
@@ -104,18 +101,20 @@ func watchLogConf() {
 			continue
 		}
 
-		err = v.Scan(&LogConf)
+		err = v.Scan(&DefaultLogConf)
 		if err != nil {
 			continue
 		}
 
-		level, _ := logrus.ParseLevel(LogConf.Level)
+		level, _ := logrus.ParseLevel(DefaultLogConf.Level)
 		logrus.SetLevel(level)
 
 		logrus.SetOutput(log.NewLogFile(
-			log.FilePath(LogConf.Path),
-			log.FileSize(LogConf.FileSize),
+			log.FilePath(DefaultLogConf.Path),
+			log.FileSize(DefaultLogConf.FileSize),
 			log.FileTime(true)))
 	}
 
 }
+
+
