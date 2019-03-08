@@ -33,7 +33,7 @@ func Init() {
 		os.Exit(0)
 	}
 
-	util.LoadConfig()
+	LoadConfig()
 	DefaultService = micro.NewService(
 		micro.Name(DefaultServiceConf.Name),
 		micro.RegisterTTL(time.Second*30),
