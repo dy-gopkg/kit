@@ -68,6 +68,10 @@ func LoadConfig() {
 
 	// 加载并初始化日志配置
 	loadLogConfAndInitLogger()
+
+	fmt.Println("registry:", DefaultRegistryConf)
+	fmt.Println("service:", DefaultServiceConf)
+	fmt.Println("log:", DefaultLogConf)
 }
 
 func loadLogConfAndInitLogger() {
