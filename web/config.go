@@ -14,19 +14,19 @@ import (
 
 type (
 	RegistryConfig struct {
-		Address string
+		Address string `json:"address"`
 	}
 
 	ServiceConfig struct {
-		Name         string
-		Version      string
-		Metadata     map[string]string
+		Name         string `json:"name"`
+		Version      string `json:"version"`
+		Metadata     map[string]string `json:"metadata"`
 	}
 
 	LogConfig struct {
-		Path     string
-		Level    string
-		FileSize int
+		Path     string `json:"path"`
+		Level    string `json:"level"`
+		FileSize int `json:"fileSize"`
 	}
 )
 
@@ -44,6 +44,8 @@ func LoadConfig() {
 		fmt.Println("load config from consul")
 		addr := os.Getenv("K8S_SERVER_CONFIG_ADDR")
 		path := os.Getenv("K8S_SERVER_CONFIG_PATH")
+		fmt.Println("addr:", addr)
+		fmt.Println("path:", path)
 		err = config.Load(consul.NewSource(
 			consul.WithAddress(addr),
 			consul.WithPrefix(path),
