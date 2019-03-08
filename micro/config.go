@@ -14,22 +14,22 @@ import (
 
 type (
 	RegistryConfig struct {
-		Address string
+		Address string `json:"address"`
 	}
 
 	ServiceConfig struct {
-		Name         string
-		ExternalAddr string
-		ListenAddr   string
-		BrokerAddr   string
-		Version      string
-		Metadata     map[string]string
+		Name         string `json:"name"`
+		ExternalAddr string `json:"externalAddr"`
+		ListenAddr   string `json:"listenAddr"`
+		BrokerAddr   string `json:"brokerAddr"`
+		Version      string `json:"version"`
+		Metadata     map[string]string `json:"metadata"`
 	}
 
 	LogConfig struct {
-		Path     string
-		Level    string
-		FileSize int
+		Path     string `json:"path"`
+		Level    string `json:"level"`
+		FileSize int `json:"fileSize"`
 	}
 )
 
