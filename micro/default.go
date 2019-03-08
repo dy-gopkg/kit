@@ -3,7 +3,6 @@ package micro
 import (
 	"flag"
 	"fmt"
-	"github.com/dy-gopkg/kit/util"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/registry"
