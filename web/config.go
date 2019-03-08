@@ -8,6 +8,7 @@ import (
 	"github.com/micro/go-config/source/consul"
 	"github.com/micro/go-config/source/file"
 	"github.com/sirupsen/logrus"
+	"io"
 	"os"
 )
 
@@ -78,11 +79,12 @@ func loadLogConfAndInitLogger() {
 
 	level, _ := logrus.ParseLevel(DefaultLogConf.Level)
 	logrus.SetLevel(level)
-
-	logrus.SetOutput(log.NewLogFile(
+	fileIO := log.NewLogFile(
 		log.FilePath(DefaultLogConf.Path),
 		log.FileSize(DefaultLogConf.FileSize),
-		log.FileTime(true)))
+		log.FileTime(true))
+	logIO := io.MultiWriter(fileIO,os.Stdout)
+	logrus.SetOutput(logIO)
 
 	go watchLogConf()
 }

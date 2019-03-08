@@ -112,7 +112,7 @@ func FileCompress(flag bool) Option {
 func (f *logFile) Write(p []byte) (n int, err error) {
 	str := (*string)(unsafe.Pointer(&p))
 	f.msgQueue <- (*str)
-	fmt.Println(*str)
+	//fmt.Println(*str)
 	return len(p), nil
 }
 
