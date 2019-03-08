@@ -46,7 +46,8 @@ func LoadConfig() {
 		path := os.Getenv("K8S_SERVER_CONFIG_PATH")
 		err = config.Load(consul.NewSource(
 			consul.WithAddress(addr),
-			consul.WithPrefix(path)))
+			consul.WithPrefix(path),
+			consul.StripPrefix(true)))
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
