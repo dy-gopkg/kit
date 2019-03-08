@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"github.com/dy-gopkg/kit/log"
 	"github.com/micro/go-config"
+	"github.com/micro/go-config/encoder/yaml"
+	"github.com/micro/go-config/source"
 	"github.com/micro/go-config/source/consul"
 	"github.com/micro/go-config/source/file"
 	"github.com/sirupsen/logrus"
@@ -49,7 +51,8 @@ func LoadConfig() {
 		err = config.Load(consul.NewSource(
 			consul.WithAddress(addr),
 			consul.WithPrefix(path),
-			consul.StripPrefix(true)))
+			consul.StripPrefix(true),
+			source.WithEncoder(yaml.NewEncoder())))
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
