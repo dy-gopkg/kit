@@ -48,6 +48,7 @@ func Init() {
 
 func Run() {
 	if err := DefaultService.Run(); err != nil {
+		fmt.Println("err:", err)
 		logrus.Fatalf("service run error: %v", err)
 	}
 }
