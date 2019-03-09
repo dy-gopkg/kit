@@ -8,7 +8,7 @@ service:
     id: 1
 
 
-log: {
+log:
   path: log
   level: debug
   fileSize: 1024000

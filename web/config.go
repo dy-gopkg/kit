@@ -20,6 +20,7 @@ type (
 	}
 
 	ServiceConfig struct {
+		Address string `json:"address"`
 		Name         string `json:"name"`
 		Version      string `json:"version"`
 		Metadata     map[string]string `json:"metadata"`

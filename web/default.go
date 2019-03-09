@@ -34,6 +34,7 @@ func Init() {
 	LoadConfig()
 
 	DefaultService = web.NewService(
+		web.Address(DefaultServiceConf.Address),
 		web.Name(DefaultServiceConf.Name),
 		web.RegisterTTL(time.Second*30),
 		web.RegisterInterval(time.Second*10),
