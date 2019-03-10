@@ -6,6 +6,7 @@ import (
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/registry"
+	"github.com/micro/go-micro/registry/consul"
 	"github.com/micro/go-micro/server"
 	"github.com/sirupsen/logrus"
 	"os"
@@ -39,7 +40,7 @@ func Init() {
 		micro.RegisterInterval(time.Second*10),
 		micro.Version(DefaultServiceConf.Version),
 		micro.Metadata(DefaultServiceConf.Metadata),
-		micro.Registry(registry.NewRegistry(registry.Addrs(DefaultRegistryConf.Address))),
+		micro.Registry(consul.NewRegistry(registry.Addrs(DefaultRegistryConf.Address))),
 	)
 
 	DefaultService.Init()

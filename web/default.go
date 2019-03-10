@@ -3,12 +3,12 @@ package web
 import (
 	"flag"
 	"fmt"
-	"github.com/micro/go-web"
 	"github.com/micro/go-micro/registry"
+	"github.com/micro/go-web"
 	"github.com/sirupsen/logrus"
+	"net/http"
 	"os"
 	"time"
-	"net/http"
 )
 
 var (
@@ -40,7 +40,7 @@ func Init() {
 		web.RegisterInterval(time.Second*10),
 		web.Version(DefaultServiceConf.Version),
 		web.Metadata(DefaultServiceConf.Metadata),
-		web.Registry(registry.NewRegistry(registry.Addrs(DefaultRegistryConf.Address))),
+		web.Registry(consul.NewRegistry(registry.Addrs(DefaultRegistryConf.Address))),
 	)
 
 	DefaultService.Init()
