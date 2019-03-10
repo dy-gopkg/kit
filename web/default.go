@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/micro/go-micro/registry"
+	"github.com/micro/go-micro/registry/consul"
 	"github.com/micro/go-web"
 	"github.com/sirupsen/logrus"
 	"net/http"
