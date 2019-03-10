@@ -12,6 +12,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"io"
 	"os"
+	"strings"
 )
 
 type (
@@ -64,6 +65,10 @@ func LoadConfig() {
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
+	}
+	//检测是否是环境变量
+	if strings.Index(DefaultRegistryConf.Address, "$") == 0 {
+		DefaultRegistryConf.Address = os.Getenv(DefaultRegistryConf.Address)
 	}
 
 	// 加载服务配置
