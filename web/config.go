@@ -95,6 +95,7 @@ func loadLogConfAndInitLogger() {
 
 	level, _ := logrus.ParseLevel(DefaultLogConf.Level)
 	logrus.SetLevel(level)
+	logrus.SetFormatter(&logrus.TextFormatter{})
 	fileIO := log.NewLogFile(
 		log.FilePath(DefaultLogConf.Path),
 		log.FileSize(DefaultLogConf.FileSize),
