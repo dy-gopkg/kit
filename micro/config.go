@@ -73,9 +73,6 @@ func LoadConfig() {
 
 	logrus.Debugf("registry: %s", DefaultRegistryConf.Address)
 
-
-	logrus.Debugf()
-
 	// 加载服务配置
 	err = config.Get("service").Scan(&DefaultServiceConf)
 	if err != nil {
