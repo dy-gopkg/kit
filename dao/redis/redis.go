@@ -13,7 +13,7 @@ var once sync.Once
 func Do(cmd string, args ...interface{}) (interface{}, error) {
 	con := _redisPool.Get()
 	defer con.Close()
-	return con.Do(cmd, args)
+	return con.Do(cmd, args...)
 }
 
 func Init(addr, password string, maxIdle, maxActive int) {
